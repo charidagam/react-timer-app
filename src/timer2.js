@@ -1,45 +1,44 @@
-import { useState, useRef } from 'react';
-
-function App() {
-
-  const [timer, setTimer] = useState(0);
-  const [isActive, setIsActive] = useState(false);
-  const [intervalRef] = useRef(null);
-  const [savedTImeRef] = useRef(0)
+//import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 
-  const startTimer = () =>{
-    intervalRef.current = setInterval( ()=>{
-      setTimer(prevTimer => prevTimer + 1);
-    },10000)
-    setIsActive(true);
-  }
+const MyTimer1 = () => {
 
-  const pauseTimer = ()=>{
-    clearInterval(intervalRef.current);
-    savedTImeRef.current = timer;
-    setIsActive(false);
-  }
-  const resumeTimer = ()=>{
-    setTimer(intervalRef.current);
-    intervalRef.current = setInterval( ()=>{
-      setTimer(prevTimer => prevTimer + 1);
-    },1000);
+    const [timer, setTimer] = useState(0);
+    const [isActive, setIsActive] = useState(false);
+    const [intervalRef] = useRef(null);
+    const [savedTImeRef] = useRef(0)
+  
+  
+    const startTimer = () =>{
+      intervalRef.current = setInterval( ()=>{
+        setTimer(prevTimer => prevTimer + 1);
+      },10000)
+      setIsActive(true);
+    }
+  
+    const pauseTimer = ()=>{
+      clearInterval(intervalRef.current);
+      savedTImeRef.current = timer;
+      setIsActive(false);
+    }
+    const resumeTimer = ()=>{
+      setTimer(intervalRef.current);
+      intervalRef.current = setInterval( ()=>{
+        setTimer(prevTimer => prevTimer + 1);
+      },1000);
+  
+      setIsActive(true);
+    }
+  
+    const stopTimer = ()=>{
+      clearInterval(intervalRef.current);
+      setTimer = 0;
+      savedTImeRef.current = 0;
+      setIsActive(false)
+    }
 
-    setIsActive(true);
-  }
-
-  const stopTimer = ()=>{
-    clearInterval(intervalRef.current);
-    setTimer = 0;
-    savedTImeRef.current = 0;
-    setIsActive(false)
-  }
-
-
-  return (
-    <div className="App">
-      <div>Timer {timer}</div>
+  return(<div><div>Timer {timer}</div><br></br>
 
       <div>
         <button onClick={startTimer}>Start</button>
@@ -55,10 +54,7 @@ function App() {
 
       <div>
         <button onClick={stopTimer}>Stop</button>
-      </div>
+      </div></div>);
+};
 
-    </div>
-  );
-}
-
-export default App;
+export default MyTimer1;
